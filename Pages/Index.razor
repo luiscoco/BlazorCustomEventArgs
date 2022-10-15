@@ -10,6 +10,9 @@ Welcome to your new app.
 <p>Try pasting into the following text box:</p>
 <input @oncustompaste="HandleCustomPaste" />
 <p>@message</p>
+<p id="status"></p>
+<a id="map-link" target="_blank"></a>
+
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
@@ -18,7 +21,7 @@ Welcome to your new app.
 
     void HandleCustomPaste(CustomPasteEventArgs eventArgs)
     {
-        message = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, you pasted: {eventArgs.PastedData}";
+        message = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, Your location is: {eventArgs.PastedData}";
     }
 }
 
