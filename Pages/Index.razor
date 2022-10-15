@@ -14,23 +14,26 @@ Welcome to your new app.
 <p>@message2</p>
 <p id="status"></p>
 <a id="map-link" target="_blank"></a>
-
+<br />
 <h3>My Google Maps Demo</h3>
+
 <!--The div element for the map -->
-<div id="map" style="height:500px;width:100%;">
+<div class="row">
+	<div id="map1" class="column" style="height:500px;width:50%;"></div>
+	<div id="map2" class="column" style="height:500px;width:50%;"></div>
 </div>
 
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 @code {
-    string message1;
-    string message2;
+	string message1;
+	string message2;
 
-    void HandleCustomPaste(CustomPasteEventArgs eventArgs)
-    {
-        message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The pasted text is: {eventArgs.PastedData}";
-        message2 = $"Your location is: {eventArgs.YourLocation}";
-    }
+	void HandleCustomPaste(CustomPasteEventArgs eventArgs)
+	{
+		message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The pasted text is: {eventArgs.PastedData}";
+		message2 = $"Your location is: {eventArgs.YourLocation}";
+	}
 }
 
 
