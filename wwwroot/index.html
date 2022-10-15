@@ -9,6 +9,8 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="BlazorCustomEventArgs.styles.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQhBQVoTz6zE4KYqAEsqMKAaoZF-mMtOA"></script>
 </head>
 
 <body>
@@ -20,8 +22,8 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
-    <script>      
-        function geoFindMe() {   
+    <script>
+        function geoFindMe() {
 
             const status = document.querySelector('#status');
             const mapLink = document.querySelector('#map-link');
@@ -34,8 +36,24 @@
                 const longitude = position.coords.longitude;
 
                 status.textContent = '';
-                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;              
+                mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
                 mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+
+                //Google Map
+                // Set location
+                const location = { lat: latitude, lng: longitude };
+                // The map, centered at Uluru
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 17,
+                    center: location,
+                    mapTypeId: 'satellite'
+                });
+                // The marker, positioned at Uluru
+                const marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                });
+            
             }
 
             function error() {
@@ -53,6 +71,7 @@
         }
 
     </script>
+
     <script>
         Blazor.registerCustomEventType('custompaste', {
             browserEventName: 'paste',
