@@ -10,7 +10,8 @@ Welcome to your new app.
 
 <p>Try pasting into the following text box:</p>
 <input @oncustompaste="HandleCustomPaste" />
-<p>@message</p>
+<p>@message1</p>
+<p>@message2</p>
 <p id="status"></p>
 <a id="map-link" target="_blank"></a>
 
@@ -19,16 +20,16 @@ Welcome to your new app.
 <div id="map" style="height:500px;width:100%;">
 </div>
 
-
-
 <SurveyPrompt Title="How is Blazor working for you?" />
 
 @code {
-    string message;
+    string message1;
+    string message2;
 
     void HandleCustomPaste(CustomPasteEventArgs eventArgs)
     {
-        message = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, Your location is: {eventArgs.PastedData}";
+        message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The pasted text is: {eventArgs.PastedData}";
+        message2 = $"Your location is: {eventArgs.YourLocation}";
     }
 }
 

@@ -16,6 +16,7 @@ namespace BlazorCustomEventArgs.CustomEvents
         // Data for these properties will be supplied by custom JavaScript logic
         public DateTime EventTimestamp { get; set; }
         public string PastedData { get; set; }
+        public string YourLocation { get; set; }
     }
 }
 

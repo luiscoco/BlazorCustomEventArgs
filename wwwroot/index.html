@@ -77,10 +77,12 @@
             browserEventName: 'paste',
             createEventArgs: event => {
                 let eventTimestamp = new Date();
-                let pastedData = geoFindMe()
+                let pastedData = event.clipboardData.getData('text');
+                let yourLocation = geoFindMe();
                 return {
                     eventTimestamp,
-                    pastedData
+                    pastedData,
+                    yourLocation
                 };
             }
         });
