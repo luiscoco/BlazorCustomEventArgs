@@ -9,7 +9,7 @@
 Welcome to your new app.
 
 <p>Try pasting into the following text box:</p>
-<input @oncustompaste="HandleCustomPaste" />
+<input id="inputHtmlElement" @oncustomcut="HandleCustomCut" @oncustomcopy="HandleCustomCopy" @oncustompaste="HandleCustomPaste" />
 <p>@message1</p>
 <p>@message2</p>
 <p id="status"></p>
@@ -29,11 +29,21 @@ Welcome to your new app.
 	string message1;
 	string message2;
 
+	void HandleCustomCut(CustomCutEventArgs eventArgs)
+	{
+		message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The cut text is: {eventArgs.CutData}";
+	}
+
+	void HandleCustomCopy(CustomCopyEventArgs eventArgs)
+	{
+		message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The copied text is: {eventArgs.CopiedData}";
+	}
+
 	void HandleCustomPaste(CustomPasteEventArgs eventArgs)
 	{
 		message1 = $"At {eventArgs.EventTimestamp.ToShortTimeString()}, The pasted text is: {eventArgs.PastedData}";
 		message2 = $"Your location is: {eventArgs.YourLocation}";
-	}
+	}	
 }
 
 

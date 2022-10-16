@@ -38,7 +38,7 @@
                     const pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
-                    };  
+                    };
                     mapLink.textContent = `Latitude: ${pos.lat} °, Longitude: ${pos.lng} °`;
                     map1.setCenter(pos);
                     // The marker, positioned at Uluru
@@ -47,7 +47,7 @@
                         map: map1,
                     });
                 }
-            );  
+            );
 
             const map2 = new google.maps.Map(document.getElementById("map2"), {
                 zoom: 18,
@@ -70,25 +70,54 @@
                         map: map2,
                     });
                 }
-            );  
+            );
 
             return mapLink.textContent;
         }
-
+    </script>
+    <script>
+        function getText() {
+            return document.getElementById("inputHtmlElement").value;
+        }
     </script>
 
     <script>
+
+        Blazor.registerCustomEventType('customcut', {
+            browserEventName: 'cut',
+            createEventArgs: event => {
+                let eventTimestamp = new Date();
+                let cutData = getText();
+                return {
+                    eventTimestamp,
+                    cutData,
+                };
+            }
+        });
+
+        Blazor.registerCustomEventType('customcopy', {
+            browserEventName: 'copy',
+            createEventArgs: event => {
+            let eventTimestamp = new Date();
+            let copiedData = getText();
+        return {
+            eventTimestamp,
+            copiedData
+        };
+            }
+        });
+
         Blazor.registerCustomEventType('custompaste', {
             browserEventName: 'paste',
             createEventArgs: event => {
-                let eventTimestamp = new Date();
-                let pastedData = event.clipboardData.getData('text');
-                let yourLocation = geoFindMe();
-                return {
-                    eventTimestamp,
-                    pastedData,
-                    yourLocation
-                };
+            let eventTimestamp = new Date();
+        let pastedData = event.clipboardData.getData('text');
+        let yourLocation = geoFindMe();
+        return {
+            eventTimestamp,
+            pastedData,
+            yourLocation
+        };
             }
         });
     </script>
