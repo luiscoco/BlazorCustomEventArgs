@@ -11,6 +11,8 @@
     <link href="BlazorCustomEventArgs.styles.css" rel="stylesheet" />
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQhBQVoTz6zE4KYqAEsqMKAaoZF-mMtOA"></script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js"></script>
 </head>
 
 <body>
@@ -77,7 +79,14 @@
     </script>
     <script>
         function getText() {
+            googleTranslateElementInit();
             return document.getElementById("inputHtmlElement").value;
+        }
+    </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
         }
     </script>
 
@@ -98,26 +107,26 @@
         Blazor.registerCustomEventType('customcopy', {
             browserEventName: 'copy',
             createEventArgs: event => {
-            let eventTimestamp = new Date();
-            let copiedData = getText();
-        return {
-            eventTimestamp,
-            copiedData
-        };
+                let eventTimestamp = new Date();
+                let copiedData = getText();
+                return {
+                    eventTimestamp,
+                    copiedData
+                };
             }
         });
 
         Blazor.registerCustomEventType('custompaste', {
             browserEventName: 'paste',
             createEventArgs: event => {
-            let eventTimestamp = new Date();
-        let pastedData = event.clipboardData.getData('text');
-        let yourLocation = geoFindMe();
-        return {
-            eventTimestamp,
-            pastedData,
-            yourLocation
-        };
+                let eventTimestamp = new Date();
+                let pastedData = event.clipboardData.getData('text');
+                let yourLocation = geoFindMe();
+                return {
+                    eventTimestamp,
+                    pastedData,
+                    yourLocation
+                };
             }
         });
     </script>
